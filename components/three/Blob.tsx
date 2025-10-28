@@ -1,6 +1,6 @@
 'use client'
 
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Canvas, useFrame, useThree, ThreeEvent } from '@react-three/fiber'
 import { Environment, OrbitControls, Sparkles, Float } from '@react-three/drei'
 import { useRef, useState, useEffect } from 'react'
 import * as THREE from 'three'
@@ -57,8 +57,6 @@ function GameKnot({ onScoreUpdate, gameActive }: GameKnotProps) {
   const [score, setScore] = useState(0)
   const [lastClickTime, setLastClickTime] = useState(0)
 
-  const { size, viewport } = useThree()
-
   useFrame((state) => {
     if (!gameActive || !meshRef.current) return
 
@@ -90,7 +88,7 @@ function GameKnot({ onScoreUpdate, gameActive }: GameKnotProps) {
     }
   })
 
-  const handleClick = (event: THREE.Event) => {
+  const handleClick = (event: ThreeEvent<MouseEvent>) => {
     event.stopPropagation()
     if (!gameActive || !meshRef.current) return
 
@@ -152,7 +150,7 @@ function GameKnot({ onScoreUpdate, gameActive }: GameKnotProps) {
 // Floating Targets Component
 function FloatingTargets({ onTargetHit, gameActive }: FloatingTargetsProps) {
   const [targets, setTargets] = useState<Target[]>([])
-  const targetRefs = useRef<THREE.Mesh[]>([])
+  const targetRefs = useRef<(THREE.Mesh | null)[]>([])
 
   // Initialize targets
   useEffect(() => {
@@ -211,7 +209,10 @@ function FloatingTargets({ onTargetHit, gameActive }: FloatingTargetsProps) {
     )
   })
 
-  const handleTargetClick = (targetId: number, event: THREE.Event) => {
+  const handleTargetClick = (
+    targetId: number,
+    event: ThreeEvent<MouseEvent>
+  ) => {
     event.stopPropagation()
     if (!gameActive) return
 
@@ -254,7 +255,7 @@ function FloatingTargets({ onTargetHit, gameActive }: FloatingTargetsProps) {
           visible={target.active}
           onClick={(event) => handleTargetClick(target.id, event)}
           ref={(el) => {
-            if (el) targetRefs.current[index] = el
+            targetRefs.current[index] = el
           }}
         >
           <sphereGeometry args={[0.3, 16, 16]} />
@@ -400,8 +401,8 @@ export default function GameScene() {
     position: [0, 0, 0],
   })
 
-  const handleScoreUpdate = (points: number) => {
-    setScore(points)
+  const handleScoreUpdate = (newScore: number) => {
+    setScore(newScore)
   }
 
   const handleTargetHit = (points: number) => {
