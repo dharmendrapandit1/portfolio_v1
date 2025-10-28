@@ -133,6 +133,7 @@ export default function HomePage() {
               items: [
                 'React.js',
                 'Next.js',
+                'React Native',
                 'JavaScript',
                 'TypeScript',
                 'Tailwind CSS',
@@ -145,7 +146,7 @@ export default function HomePage() {
             },
             {
               category: 'Database',
-              items: ['MongoDB (Mongoose ODM)', 'Supabase', 'Prisma'],
+              items: ['MongoDB (Mongoose ODM)', 'Supabase', 'Prisma', 'MySQL'],
             },
             {
               category: 'Authentication',
@@ -157,11 +158,22 @@ export default function HomePage() {
             },
             {
               category: 'Hosting & Deployment',
-              items: ['Vercel', 'AWS (EC2, S3)', 'Render', 'Amplify'],
+              items: [
+                'Vercel',
+                'AWS (EC2, S3)',
+                'Render',
+                'Amplify',
+                'Netlify',
+                'Hostinger',
+              ],
             },
             {
               category: 'Programming',
-              items: ['Java', 'Python', 'DSA (Basics)'],
+              items: [
+                'Java(core + Adv)',
+                'Python',
+                'DSA (Algorithms & Data Structures)',
+              ],
             },
           ].map((group, i) => (
             <motion.div
@@ -212,7 +224,7 @@ export default function HomePage() {
             {
               role: 'Technical Head Intern',
               company: 'Hostro Ventures private limited',
-              period: 'July,2025 - Aug, 2025',
+              period: 'July,2025 - Oct, 2025',
               desc: 'Led technical initiatives by managing UI/UX improvements, mentoring junior developers, and integrating optimized web components for real-world applications',
             },
           ].map((exp, i) => (
@@ -242,6 +254,12 @@ export default function HomePage() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {[
+            {
+              title: 'UniSHV ',
+              desc: 'I built this educational platform using Node.js, Express, JWT, bcrypt.js, and express-limiter for secure authentication and request handling. It also integrates ImageKit for image management and EJS for dynamic templating.',
+
+              live: 'https://univsvh.in/',
+            },
             {
               title: 'E-commerce API',
               desc: 'I built an E-commerce API using Node.js, Express, JWT, bcrypt.js, and express-limiter for secure authentication and request handling. It also integrates ImageKit for image management and EJS for dynamic templating.',
